@@ -1,0 +1,735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PrimeCard Predictive Numerology — Integrated Professional Report</title>
+<style>
+:root{
+  --bg:#070713; --panel:rgba(18,15,40,.82); --panel2:rgba(30,19,55,.78);
+  --gold:#ffd54a; --gold2:#ff9f1c; --cyan:#28e7ff; --pink:#ff3cac;
+  --purple:#8f5cff; --green:#2df5a5; --red:#ff5c7a; --muted:#b9b6cf; --text:#f7f6ff;
+  --line:rgba(255,255,255,.14); --shadow:0 18px 55px rgba(0,0,0,.42);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; padding:24px; color:var(--text); font-family:Inter,Segoe UI,Arial,sans-serif; line-height:1.55;
+  background:
+    radial-gradient(circle at 8% 4%,rgba(143,92,255,.25),transparent 32%),
+    radial-gradient(circle at 92% 8%,rgba(40,231,255,.18),transparent 30%),
+    radial-gradient(circle at 50% 100%,rgba(255,60,172,.18),transparent 35%),
+    linear-gradient(135deg,#070713 0%,#120927 48%,#081724 100%);
+  min-height:100vh; -webkit-print-color-adjust:exact; print-color-adjust:exact;
+}
+*::-webkit-scrollbar{width:10px} *::-webkit-scrollbar-thumb{background:linear-gradient(var(--purple),var(--cyan));border-radius:20px}
+.container{max-width:1320px;margin:auto}
+.hero{
+  padding:34px 30px 28px; border:1px solid rgba(255,213,74,.35); border-radius:28px; background:linear-gradient(135deg,rgba(35,19,73,.92),rgba(8,25,42,.86));
+  box-shadow:var(--shadow); position:relative; overflow:hidden; margin-bottom:24px;
+}
+.hero:before,.hero:after{content:"";position:absolute;border-radius:50%;filter:blur(2px);opacity:.65}
+.hero:before{width:280px;height:280px;background:rgba(40,231,255,.12);right:-80px;top:-100px}
+.hero:after{width:220px;height:220px;background:rgba(255,60,172,.12);left:-90px;bottom:-110px}
+.brand{display:flex;align-items:center;gap:12px;color:var(--gold);font-weight:900;letter-spacing:1px;text-transform:uppercase}
+.brand .orb{width:42px;height:42px;border-radius:50%;background:conic-gradient(var(--gold),var(--pink),var(--cyan),var(--gold));box-shadow:0 0 30px rgba(255,213,74,.45)}
+h1{font-size:clamp(2rem,4vw,3.5rem);line-height:1.05;margin:18px 0 10px;font-weight:950;letter-spacing:-1px;background:linear-gradient(90deg,#fff,var(--gold),var(--cyan),var(--pink));-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{color:var(--muted);max-width:920px;margin:0}
+.notice{margin-top:18px;padding:13px 16px;border-left:4px solid var(--red);background:rgba(255,92,122,.08);border-radius:12px;color:#ffd9e0}
+.card,.section{
+  background:linear-gradient(145deg,rgba(25,20,51,.88),rgba(11,26,42,.78)); border:1px solid var(--line); border-radius:22px;
+  padding:24px; box-shadow:var(--shadow); margin:24px 0; backdrop-filter:blur(12px);
+}
+.section{margin-top:34px}
+.section-title{display:flex;align-items:center;gap:12px;margin:0 0 20px;font-size:1.55rem;color:var(--gold);font-weight:900;letter-spacing:.3px}
+.section-title .icon{width:38px;height:38px;display:grid;place-items:center;border-radius:12px;background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff}
+.sub-title{font-size:1.08rem;color:var(--cyan);font-weight:850;margin:22px 0 12px}
+.form-grid,.summary-grid,.metric-grid,.qa-grid,.therapy-grid,.house-grid,.forecast-grid,.chakra-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:16px}
+.form-group label{display:block;color:#e7e4f4;font-size:.78rem;font-weight:800;letter-spacing:.8px;text-transform:uppercase;margin-bottom:7px}
+input,select{width:100%;padding:13px 14px;border-radius:12px;border:1px solid rgba(255,213,74,.2);background:rgba(4,7,18,.7);color:#fff;outline:none;font-size:1rem}
+input:focus,select:focus{border-color:var(--cyan);box-shadow:0 0 0 3px rgba(40,231,255,.1)}
+input[readonly]{color:var(--cyan);font-weight:800}
+.time-row{display:grid;grid-template-columns:2fr 1fr;gap:8px}
+.btn{
+  border:0;border-radius:14px;padding:15px 20px;font-weight:900;cursor:pointer;color:#061018;
+  background:linear-gradient(90deg,var(--gold),var(--gold2),var(--pink),var(--purple),var(--cyan));background-size:250% 100%;
+  animation:shift 7s ease infinite; box-shadow:0 10px 30px rgba(255,60,172,.22); transition:.2s;
+}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 35px rgba(40,231,255,.24)}
+.btn-wide{grid-column:1/-1}
+@keyframes shift{0%,100%{background-position:0%}50%{background-position:100%}}
+.hidden{display:none!important}
+.badge{display:inline-flex;align-items:center;padding:6px 10px;border-radius:999px;background:rgba(40,231,255,.1);border:1px solid rgba(40,231,255,.3);color:var(--cyan);font-weight:800;font-size:.78rem}
+.summary-item,.metric,.qa,.therapy,.house,.forecast,.matrix-cell{
+  background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.09);border-radius:16px;padding:15px
+}
+.summary-item .k,.metric .k{font-size:.72rem;text-transform:uppercase;letter-spacing:.7px;color:var(--muted);font-weight:800}
+.summary-item .v{font-size:1.03rem;font-weight:800;margin-top:4px;word-break:break-word}
+.metric{position:relative;overflow:hidden}
+.metric:before{content:"";position:absolute;left:0;top:0;width:100%;height:4px;background:linear-gradient(90deg,var(--gold),var(--pink),var(--cyan))}
+.metric .num{font-size:3.2rem;font-weight:950;color:#fff;line-height:1;margin:8px 0}
+.metric .caption{color:var(--muted)}
+.meter{margin-top:14px}
+.meter-head{display:flex;justify-content:space-between;font-size:.82rem;color:var(--muted);font-weight:800}
+.meter-track{height:15px;background:rgba(0,0,0,.42);border:1px solid rgba(255,255,255,.1);border-radius:999px;overflow:hidden;margin-top:7px}
+.meter-fill{height:100%;width:0;background:linear-gradient(90deg,var(--cyan),var(--gold),var(--pink));border-radius:999px;transition:width 1s ease}
+.meter-score{font-size:1.5rem;font-weight:950;color:var(--gold);text-align:right;margin-top:4px}
+.gauge{width:220px;height:120px;margin:0 auto 10px;position:relative;overflow:hidden}
+.gauge .arc{position:absolute;left:10px;top:10px;width:200px;height:200px;border:18px solid rgba(255,255,255,.08);border-bottom-color:transparent;border-left-color:rgba(40,231,255,.55);border-right-color:rgba(255,60,172,.55);border-radius:50%}
+.gauge .needle{position:absolute;left:50%;bottom:12px;width:3px;height:82px;background:var(--gold);transform-origin:50% 100%;box-shadow:0 0 12px var(--gold)}
+.gauge .center{position:absolute;left:calc(50% - 7px);bottom:5px;width:14px;height:14px;border-radius:50%;background:var(--gold);box-shadow:0 0 12px var(--gold)}
+.gauge-value{text-align:center;font-weight:950;font-size:1.6rem;color:var(--cyan)}
+table{width:100%;border-collapse:collapse;margin:10px 0;font-size:.88rem}
+th,td{border:1px solid rgba(255,255,255,.12);padding:9px 10px;vertical-align:top;text-align:left}
+th{background:linear-gradient(90deg,rgba(143,92,255,.35),rgba(40,231,255,.2));color:#fff;text-transform:uppercase;font-size:.72rem;letter-spacing:.5px}
+tr:nth-child(even){background:rgba(255,255,255,.025)}
+.qa .q{font-weight:900;color:#fff;margin-bottom:7px}
+.qa .a{color:#c8c4d8}
+.qa-group{margin:18px 0}
+.qa-group h4{margin:0 0 10px;color:var(--gold);font-size:1.05rem}
+.therapy{border-left:4px solid var(--pink)}
+.therapy .therapy-num{font-size:1.6rem;font-weight:950;color:var(--gold)}
+.therapy p{margin:6px 0;color:#d7d3e3}
+.therapy small{color:var(--muted)}
+.disclaimer{background:rgba(255,92,122,.08);border:1px solid rgba(255,92,122,.25);padding:14px 16px;border-radius:14px;color:#ffd8df}
+.matrix{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;max-width:520px;margin:15px auto}
+.matrix-cell{min-height:80px;display:flex;flex-direction:column;justify-content:center;align-items:center;background:linear-gradient(145deg,rgba(143,92,255,.18),rgba(40,231,255,.08))}
+.matrix-cell .house{font-size:.72rem;color:var(--muted);padding:0;border:0;background:none}
+.matrix-cell .n{font-size:1.9rem;font-weight:950;color:var(--gold)}
+.node-card{background:linear-gradient(145deg,rgba(255,213,74,.08),rgba(40,231,255,.06));border:1px solid rgba(255,213,74,.2);border-radius:16px;padding:15px}
+.node-card h4{margin:0 0 8px;color:var(--cyan)}
+.print-end{text-align:center;padding:34px 0 60px}
+.print-btn{width:72px;height:72px;border-radius:50%;border:0;cursor:pointer;background:linear-gradient(135deg,var(--gold),var(--pink),var(--cyan));color:#091018;font-size:1.7rem;box-shadow:0 0 35px rgba(40,231,255,.28);transition:.2s}
+.print-btn:hover{transform:scale(1.08) rotate(4deg)}
+.small-note{font-size:.78rem;color:var(--muted)}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:18px}
+.list{margin:0;padding-left:20px}.list li{margin:6px 0}
+.pill-row{display:flex;gap:8px;flex-wrap:wrap}
+.sticky-top{position:sticky;top:10px;z-index:5}
+@media(max-width:760px){body{padding:12px}.card,.section{padding:16px}.two-col{grid-template-columns:1fr}.matrix{max-width:100%}}
+@media print{
+  @page{size:A4 portrait;margin:12mm 11mm 14mm}
+  body{padding:0;background:#07111d!important;color:#10131a!important;font-size:10pt}
+  .hero{border:0;border-radius:0;box-shadow:none;background:linear-gradient(135deg,#18223a,#3b1746)!important;min-height:32mm}
+  .input-section,.screen-only,.print-end{display:none!important}
+  .section,.card{break-before:page;page-break-before:always;break-inside:auto;box-shadow:none;border:1px solid #b8c0d0;background:#fff!important;color:#121620!important}
+  .section:first-of-type{break-before:auto;page-break-before:auto}
+  .section-title,.sub-title{color:#7a2bbd!important}
+  .summary-item,.metric,.qa,.therapy,.house,.forecast,.matrix-cell,.node-card{background:#f7f9fc!important;border-color:#cbd2df!important;color:#10131a!important}
+  .summary-item .k,.metric .k,.caption,.qa .a,.small-note,.therapy small{color:#4c5668!important}
+  .metric .num,.therapy .therapy-num,.matrix-cell .n{color:#8b2bd1!important}
+  .meter-track{background:#e8edf5!important;border-color:#b8c0d0!important}
+  .meter-fill{background:linear-gradient(90deg,#2b7de9,#e3a51d,#d83a87)!important}
+  table{font-size:8pt}th{background:#26324a!important;color:#fff!important}td,th{border-color:#9ea9b8!important}
+  .page-break{break-before:page;page-break-before:always}
+  .no-break{break-inside:avoid;page-break-inside:avoid}
+  h1,h2,h3,h4{break-after:avoid}
+  .qa-grid,.therapy-grid,.forecast-grid,.house-grid,.metric-grid{grid-template-columns:1fr 1fr}
+  .two-col{grid-template-columns:1fr 1fr}
+  .disclaimer{background:#fff5f7!important;color:#7a1e2e!important;border-color:#e6aab5!important}
+}
+.form-error{display:none;margin-top:12px;padding:12px 14px;border-radius:12px;background:#fff1f3;color:#8b1e2d;border:1px solid #ef9aa8;font-weight:700;line-height:1.45}
+</style>
+</head>
+<body>
+<div class="container">
+
+<header class="hero">
+  <div class="brand"><span class="orb"></span><span>PrimeCard • Predictive Numerology Intelligence</span></div>
+  <h1>Predictive Numerology Master Report</h1>
+  <p>Integrated Clinical • Surgical Body Graph • Disease • Lo Shu • Financial • Growth • Dasha Forecasting Dashboard</p>
+  <div class="notice"><strong>Important Reflective & Medical Notice:</strong> This report reproduces and integrates the attached numerology calculators and the attached PRIMECARD CTN research framework. It is a complementary, traditional/esoteric framework and is not a substitute for qualified medical diagnosis, surgical assessment, financial advice, or other professional care.</div>
+</header>
+
+<section class="card input-section">
+  <h2 class="section-title"><span class="icon">✦</span> Master Input Console</h2>
+  <form id="masterForm" class="form-grid">
+    <div class="form-group"><label>Birth Name</label><input id="birthName" required placeholder="Enter full birth name"></div>
+    <div class="form-group"><label>Birth Date</label><input id="birthDate" type="date" required></div>
+    <div class="form-group"><label>Current Age (Auto Populate)</label><input id="age" readonly></div>
+    <div class="form-group"><label>Birth Day (Auto Populate)</label><input id="birthDay" readonly></div>
+    <div class="form-group">
+      <label>Birth Time (12 Hour System)</label>
+      <div class="time-row">
+        <select id="birthHour" required><option value="">Hour</option></select>
+        <select id="birthMinute" required><option value="">Minute</option></select>
+      </div>
+      <div style="margin-top:8px"><select id="ampm"><option>AM</option><option>PM</option></select></div>
+    </div>
+    <div class="form-group"><label>Birth Place Latitude</label><input id="latitude" type="number" step="any" required placeholder="e.g. 18.5204"></div>
+    <div class="form-group"><label>Birth Place Longitude</label><input id="longitude" type="number" step="any" required placeholder="e.g. 73.8567"></div>
+    <button class="btn btn-wide" type="submit">Generate PrimeCard Predictive Numerology Report</button><div id="formError" class="form-error" role="alert" aria-live="polite"></div>
+  </form>
+</section>
+
+<div id="report" class="hidden">
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">✦</span> PrimeCard Numerological Prescription</h2>
+  <div class="summary-grid">
+    <div class="summary-item"><div class="k">Practicioner Name</div><div class="v">Prof. (Dr.) Parikshit Chakraborty</div></div>
+    <div class="summary-item"><div class="k">Institution Name</div><div class="v">PrimeCard</div></div>
+    <div class="summary-item"><div class="k">Category</div><div class="v">A B2B Esoteric, Holistic & Learning Solutions Provider</div></div>
+    <div class="summary-item"><div class="k">Location</div><div class="v">Pune & Kolkata</div></div>
+    <div class="summary-item"><div class="k">Date</div><div class="v" id="prescriptionDate">—</div></div>
+  </div>
+  <div class="disclaimer" style="margin-top:16px"><strong>Report positioning:</strong> The attached clinical calculator, surgical calculator, disease calculator, Lo Shu calculator, financial calculator, analytical calculator, dasha calculator and CTN thesis are treated as the source basis. Where the CTN thesis does not publish a domain-specific therapy table, the report explicitly labels the therapy as a general CTN protocol rather than inventing a source-specific prescription.</div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">01</span> Summary Details</h2>
+  <div id="summaryDetails" class="summary-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">02</span> Clinical Details</h2>
+  <div id="clinicalMetrics" class="metric-grid"></div>
+  <div class="sub-title">Clinical Insight Panels</div>
+  <div id="clinicalInsights" class="qa-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">✚</span> Complementary Therapy for Clinical Issues</h2>
+  <p class="small-note">Source-grounded CTN therapy: the thesis explicitly defines HTN-to-CTN one-to-one mapping. It does not publish separate HSN-to-word or HAN-to-word tables, so HSN and HAN are presented as contextual diagnostic metrics while the source-supported CTN target remains anchored to HTN.</p>
+  <div id="clinicalTherapy" class="therapy-grid"></div>
+  <div class="card no-break">
+    <h3 class="sub-title">Standardized CTN Execution Protocol</h3>
+    <ul class="list">
+      <li>Use ruled paper for visual containment and baseline stability.</li>
+      <li>Use bright red ink for every exercise.</li>
+      <li>Write the prescribed word in uppercase block letters.</li>
+      <li>Use one complete prescribed word per ruled line.</li>
+      <li>One dosage consists of 11 written lines.</li>
+      <li>Mild / Preventive: 2 dosages per day.</li>
+      <li>Moderate Stress: 3 dosages per day.</li>
+      <li>Acute Stress: 4 dosages per day.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">03</span> Body Graph Details</h2>
+  <div id="surgicalTop" class="metric-grid"></div>
+  <div class="sub-title">Diagnostic Matrix & Prognosis</div>
+  <div id="surgicalPrognosis" class="card"></div>
+  <div class="sub-title">Numeroscope 9-House Graphical Matrix</div>
+  <div id="numeroscope" class="matrix"></div>
+  <div class="sub-title">House, Full Body Graph Predictors & Chakra Healing Remedies</div>
+  <div id="chakraTable"></div>
+  <div class="sub-title">House & Number Wise Predictions</div>
+  <div id="housePredictions" class="house-grid"></div>
+  <div class="sub-title">Number Wise Predictions & Matrix Node Answers</div>
+  <div id="surgicalAnswers" class="qa-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">✎</span> Complementary Therapy for Surgical Issues</h2>
+  <p class="small-note">The attached CTN thesis does not publish a surgical Body Graph Node × House therapy table. The following is therefore a clearly labelled CTN application overlay: it applies the thesis's general one-to-one CTN framework to the active Body Graph Node and to the surgical calculator's high-attention houses, without claiming that the thesis validated a surgical-specific mapping.</p>
+  <div id="surgicalTherapy" class="therapy-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">04</span> Disease Details</h2>
+  <div id="diseaseMetrics" class="metric-grid"></div>
+  <div class="sub-title">Long-Term, Current & Future Disease Insights</div>
+  <div id="diseaseInsights" class="qa-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">✎</span> Complementary Therapy for Disease Issues</h2>
+  <p class="small-note">The disease calculator supplies the three disease metrics and number-wise health narratives. The CTN thesis does not provide a separate disease-specific therapy table; the source-supported general CTN framework is therefore shown as a complementary overlay.</p>
+  <div id="diseaseTherapy" class="therapy-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">05</span> Lo Shu Grid Details</h2>
+  <div class="two-col">
+    <div class="card no-break">
+      <h3 class="sub-title">Personal Lo Shu Grid</h3>
+      <div id="loshuGrid" class="matrix"></div>
+      <div id="loshuBadges" class="pill-row"></div>
+    </div>
+    <div class="card no-break">
+      <h3 class="sub-title">Talent & Grid Harmony Score</h3>
+      <div class="gauge"><div class="arc"></div><div id="loshuNeedle" class="needle"></div><div class="center"></div></div>
+      <div id="loshuScore" class="gauge-value">—</div>
+      <p id="loshuStatus" style="text-align:center;color:var(--muted)"></p>
+      <p id="loshuSummary" class="small-note"></p>
+    </div>
+  </div>
+  <div class="sub-title">Past Talent Questions</div><div id="pastQA" class="qa-grid"></div>
+  <div class="sub-title">Present Talent Questions</div><div id="presentQA" class="qa-grid"></div>
+  <div class="sub-title">Future Talent Questions</div><div id="futureQA" class="qa-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">✎</span> Complementary Therapy for Lo Shu Grid Issues</h2>
+  <p class="small-note">Missing-number remedies in the attached Lo Shu calculator use a remedy system excluded by this request. This report substitutes only the research-paper CTN writing framework and labels it as a general complementary overlay; the thesis does not publish a Lo Shu-specific missing-number therapy table.</p>
+  <div id="loshuTherapy" class="therapy-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">06</span> Financial Details</h2>
+  <div id="wealthMetrics" class="metric-grid"></div>
+  <div class="sub-title">Financial Insight Questions & Answers</div>
+  <div id="wealthQA" class="qa-grid"></div>
+  <div class="card no-break">
+    <h3 class="sub-title">Long-Term Wealth Condition</h3>
+    <p id="wealthLong"></p>
+    <h3 class="sub-title">Current Wealth Situation</h3>
+    <p id="wealthCurrent"></p>
+    <h3 class="sub-title">Future Wealth Prediction</h3>
+    <p id="wealthFuture"></p>
+  </div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">✎</span> Complementary Therapy for Financial Issues</h2>
+  <p class="small-note">The financial calculator contains its own traditional remedy content, but the request excludes those items. The attached CTN thesis is therefore used only for a non-invasive complementary writing overlay; the thesis does not provide a wealth-specific therapy table.</p>
+  <div id="wealthTherapy" class="therapy-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">07</span> Growth Details</h2>
+  <div id="growthMetrics" class="metric-grid"></div>
+  <div class="sub-title">Career • Job • Business • Education • Love • Marriage — Full Predictive Q&A</div>
+  <div id="growthQA"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">✎</span> Complementary Therapy for Growth Issues</h2>
+  <p class="small-note">The analytical calculator's original remedy content is intentionally omitted. The CTN thesis is used only as a general complementary writing framework because it does not publish a growth-domain therapy table.</p>
+  <div id="growthTherapy" class="therapy-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">08</span> Dasha Period Details</h2>
+  <div id="dashaTop" class="metric-grid"></div>
+  <div class="sub-title">Active Life Period Forecast</div>
+  <div id="activeDasha" class="forecast-grid"></div>
+  <div class="sub-title">Planetary Energy Column Analysis</div>
+  <div id="planetAnalysis"></div>
+  <div class="sub-title">Life Growth Area Distribution</div>
+  <div id="dashaSummary" class="card"></div>
+  <div class="sub-title">Complete 90-Year Mahadasha & Antardasha Master Schedule</div>
+  <div style="overflow-x:auto"><table id="dashaTable"><thead><tr><th>Mahadasha</th><th>Number</th><th>Duration</th><th>Start</th><th>End</th><th>Age Range</th><th>Antardasha Sub-Cycles & Date-Wise Periods</th></tr></thead><tbody></tbody></table></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">✎</span> Complementary Therapy for Dasha Period Issues</h2>
+  <p class="small-note">The dasha calculator's original traditional remedy content is intentionally omitted. The CTN thesis does not publish a dasha-specific therapy table, so this section uses only the general CTN writing framework as a complementary overlay for the active period and its major life areas.</p>
+  <div id="dashaTherapy" class="therapy-grid"></div>
+</section>
+
+<section class="section">
+  <h2 class="section-title"><span class="icon">◈</span> Research-Basis CTN Reference Matrix</h2>
+  <p>The attached thesis describes CTN as a structured complementary graphological protocol using a one-to-one alignment with HTN. The source matrix below is reproduced for report use.</p>
+  <table><thead><tr><th>HTN</th><th>Primary Target Systems</th><th>Source-Specified CTN Word</th></tr></thead><tbody id="ctnTableBody"></tbody></table>
+  <div class="two-col">
+    <div class="card no-break"><h3 class="sub-title">Standardized Materials</h3><ul class="list"><li>Ruled paper</li><li>Bright red ink pen</li><li>Uppercase block letters</li><li>One prescribed word per line</li></ul></div>
+    <div class="card no-break"><h3 class="sub-title">Dosage Structure</h3><ul class="list"><li>One dosage: 11 lines</li><li>Mild / Preventive: 2 dosages daily</li><li>Moderate Stress: 3 dosages daily</li><li>Acute Stress: 4 dosages daily</li></ul></div>
+  </div>
+</section>
+
+<section class="print-end screen-only">
+  <button class="print-btn" onclick="window.print()" title="Print A4 Report" aria-label="Print A4 Report">🖨</button>
+  <div style="margin-top:10px;font-weight:900;color:var(--gold)">PRINT A4 PROFESSIONAL REPORT</div>
+  <div class="small-note">The input form is excluded from print; the generated report, summary, metrics, insights, therapies, matrices and schedules are included.</div>
+</section>
+</div>
+</div>
+
+<script>
+const CTN_MAP = {"1": ["Cardiovascular, Eyes, Head", "HEALTH"], "2": ["Gastric Mucosa, Fluids, Lymph", "CALM"], "3": ["Hepatic, Pancreas, Nerves", "GROWTH"], "4": ["Structural Bones, Skeleton", "BONE"], "5": ["Central Nervous System, Brain", "NERVE"], "6": ["Endocrine, Thyroid, Hormones", "HARMONY"], "7": ["Immune Integrity, Skin", "SHIELD"], "8": ["Excretory System, Joints", "FLOW"], "9": ["Muscles, Blood Circulation", "VITAL"]};
+const PLANETS = {"1": ["Sun", "Leadership, Vitality, Authority"], "2": ["Moon", "Intuition, Emotions, Adaptability"], "3": ["Jupiter", "Wisdom, Expansion, Growth"], "4": ["Rahu", "Ambition, Unconventionality, Innovation"], "5": ["Mercury", "Intellect, Communication, Commerce"], "6": ["Venus", "Harmony, Luxury, Relationships"], "7": ["Ketu", "Spiritual Awakening, Analysis, Insight"], "8": ["Saturn", "Discipline, Karma, Hard Work"], "9": ["Mars", "Energy, Action, Courage"]};
+const CLINICAL_SYSTEMS = {"1": "Head, Brain, Circulatory System, Eyes, and Upper Spine", "2": "Stomach, Digestive Tract, Lymphatic System, and Fluid Balance", "3": "Liver, Nervous System, Throat, and Vocal Apparatus", "4": "Structure, Bones, Teeth, Gallbladder, and Joints", "5": "Nervous System, Respiratory System, Lungs, and Adrenals", "6": "Heart, Throat, Circulation, and Metabolic Equilibrium", "7": "Immune System, Brain Chemistry, Sleep Cycles, and Mental Balance", "8": "Blood Pressure, Skeleton, Kidneys, and Structural Alignment", "9": "Blood, Muscular System, Immune Response, and Heat Regulation"};
+const HEALTH_PRED = {"1": "Primary Focus: Heart, circulatory system, and head. Vulnerabilities: Prone to high blood pressure, palpitations, and eye issues. Vitality is usually strong, but overexertion can lead to sudden exhaustion. Recommendation: Incorporate aerobic exercises and monitor stress levels to protect cardiovascular health.", "2": "Primary Focus: Digestive system, stomach, and body fluids. Vulnerabilities: Sensitive to environmental changes. Prone to indigestion, poor blood circulation, and psychosomatic illnesses driven by emotional stress. Recommendation: Maintain a calm eating environment, hydrate well, and practice mindfulness to ease nervous tension.", "3": "Primary Focus: Liver, skin, and nervous system. Vulnerabilities: Susceptible to skin conditions, nerve exhaustion, and liver-related toxicities. Overindulgence in food or work drastically impacts this number. Recommendation: Prioritize liver detoxes, consume skin-friendly nutrients, and ensure adequate mental rest.", "4": "Primary Focus: Bones, respiratory tract, and mysterious ailments. Vulnerabilities: Highly susceptible to bone/joint pain, respiratory infections, and sudden illnesses that are hard to diagnose. Depression can weaken immunity. Recommendation: Ensure sufficient Vitamin D/Calcium intake and practice breathing exercises (Pranayama).", "5": "Primary Focus: Nervous system, sleep cycles, and mental fatigue. Vulnerabilities: Prone to insomnia, nervous breakdowns, and twitching. The fast-paced nature of a 5 leads to neglecting physical limits. Recommendation: Strict sleep hygiene is crucial. Avoid stimulants like caffeine late in the day and incorporate meditation.", "6": "Primary Focus: Throat, kidneys, and reproductive system. Vulnerabilities: Susceptible to ENT (Ear, Nose, Throat) infections, kidney stones, and hormonal imbalances. Emotional well-being is deeply tied to physical health. Recommendation: Stay warmly clothed in cold weather, hydrate constantly, and manage emotional boundaries.", "7": "Primary Focus: Mental health, immunity, and lymphatic system. Vulnerabilities: Extreme sensitivity to infections and environmental pollutants. Worry and anxiety manifest physically. Prone to allergies. Recommendation: Spend time in nature to recharge. Focus on immunity-boosting foods and maintaining a pure, clean environment.", "8": "Primary Focus: Chronic conditions, teeth, joints, and excretory system. Vulnerabilities: Associated with long-lasting illnesses, rheumatism, arthritis, and dental issues. Healing is often slow but steady. Recommendation: Regular gentle physical therapy, dental checkups, and a highly disciplined lifestyle are mandatory.", "9": "Primary Focus: Inflammations, fevers, and blood pressure. Vulnerabilities: Prone to acute fevers, sudden accidents, cuts, and inflammatory diseases. High energy levels can lead to recklessness. Recommendation: Avoid spicy/heating foods. Channel aggressive energy into safe physical sports to prevent internal inflammation."};
+const HOUSE_DATA = {"1": ["Sun / Leadership", "Fosters independence, ambition, and strong self-reliance. Ideal for autonomous career pursuits, but requires balancing against emotional isolation."], "2": ["Moon / Diplomacy", "Emphasizes domestic harmony, emotional receptivity, and interpersonal partnerships. Highly nurturing environment supporting deep emotional bonds."], "3": ["Jupiter / Expression", "Amplifies creativity, optimism, social communication, and personal expansion. Attracts joyful community interaction and artistic inspiration."], "4": ["Rahu / Structure", "Encourages stability, discipline, routine, and practical foundational order. Promotes long-term security and steady architectural focus."], "5": ["Mercury / Dynamic Freedom", "Governs adaptability, dynamic energy, curiosity, and progressive life transitions. Excellent for versatile growth and dynamic exploration."], "6": ["Venus / Family & Healing", "Highlights domestic warmth, compassionate service, aesthetic design, and harmonious family unity. Fosters supportive healing and caretaking."], "7": ["Ketu / Spiritual Sanctuary", "Cultivates introspection, contemplative solitude, spiritual depth, and inner wisdom. Serves as a sanctuary for mental clarity and philosophical study."], "8": ["Saturn / Material Power", "Attracts financial prosperity, executive ambition, and disciplined resource management. Demands emotional equilibrium to navigate power dynamics."], "9": ["Mars / Humanitarian Wisdom", "Symbolizes universal compassion, completion of karmic cycles, and philanthropic dedication. Inspires empathetic service and broad global perspective."]};
+const SURGICAL_ANSWERS = ["Yes, charts exhibiting strong afflictions in malefic houses (6th, 8th, 12th) combined with a Node v${nodeNum}.0 resonance indicate a heightened baseline vulnerability to sharp-instrument interventions and physical trauma.", "When assessing surgery through the lens of Node v${nodeNum}.0, the primary focus rests on the 6th house (injuries/healing), 8th house (transformative operations), and 12th house (hospitalization), anchored by the Ascendant.", "The 6th house governs acute infections, physical wounds, and daily health stressors. Under Node v${nodeNum}.0 parameters, afflictions here point toward clinical therapies and minor corrective procedures.", "The 8th house signifies sudden transformation, trauma, and major surgical operations. Node v${nodeNum}.0 channels this house to evaluate deep-seated surgical interventions and blood-related procedures.", "The 12th house rules institutional confinement, operating theatres, and recovery beds. Node v${nodeNum}.0 evaluates post-operative recuperation duration and hospital stay requirements through this sector.", "Mars represents heat, inflammation, blood, and sharp instruments. Under Node v${nodeNum}.0, Mars's placement dictates the exact physical vulnerability index for cuts and surgical incisions.", "Traditional surgical combinations involve Mars connected with dusthana lords (6th, 8th, 12th) or lunar nodes. Node v${nodeNum}.0 scales the intensity of these planetary contacts.", "An afflicted or highly activated Mars increases proneness to inflammatory conditions and sudden trauma, directly raising the surgical likelihood under Node v${nodeNum}.0 metrics.", "Mars-Saturn combinations couple fiery pressure (Mars) with structural restriction or chronic wear (Saturn), frequently indicating bone fractures, dental surgeries, or deep-tissue interventions.", "Mars in the 6th house grants resilience against disease but can trigger acute inflammatory flare-ups, wounds, or minor surgical corrections aligned with Node v${nodeNum}.0.", "Mars in the 8th house heightenedly correlates with sudden accidents, blood loss, and critical surgical operations governed by the specific sign placement.", "Mars in the 12th house indicates hidden inflammatory disorders or high stress requiring institutional care and post-operative hospital recovery under Node v${nodeNum}.0.", "Malefics afflicting the 6th, 8th, or 12th houses amplify acute medical emergencies and structural failures, aligning with the subject's Node v${nodeNum}.0 vulnerability profile.", "The 8th lord dictates how the individual handles sudden health crises, determining whether chronic ailments escalate into major operative interventions.", "A strong or afflicted 6th lord interacting with malefic influences highlights recurring health vulnerabilities that necessitate medical treatment or surgical excision.", "The sign, house, and planetary aspects of the 8th lord help categorize whether a potential procedure under Node v${nodeNum}.0 is routine, elective, or an emergency operation.", "When Mars directly aspects or occupies the Ascendant, or links with the Ascendant lord, it imparts physical susceptibility to scars, burns, and surgical interventions.", "An afflicted Ascendant reduces overall constitutional vitality, making the physical form more vulnerable to external trauma and surgical procedures.", "Mars aspecting the Ascendant brings fiery impulsiveness and a higher propensity for physical accidents, sports injuries, or surgical marks on the body.", "Saturn aspecting Mars can delay healing or cause chronic stiffness, but it also brings caution, discipline, and structured recovery following surgery.", "Rahu magnifies, distorts, and brings sudden or atypical medical conditions. Combined with Mars under Node v${nodeNum}.0, Rahu points to rare diagnoses or complex surgeries.", "Ketu naturally signifies piercing, cutting, micro-surgeries, laser treatments, and sudden unexpected incisions due to its headless and sharp nature.", "Rahu-Mars (Angarak Yoga) creates volatile, high-pressure energy prone to accidents, sudden inflammations, sharp injuries, and emergency surgical interventions.", "Ketu-Mars combinations point to sudden punctures, laser procedures, laparoscopic surgeries, or treatments involving localized physical cutting.", "Dashas and antardashas of Mars, Rahu, Ketu, or dusthana lords frequently coincide with the timing of surgeries or acute medical crises.", "Activation of a Mars dasha, especially when poorly placed or connected to dusthana houses, highlights high-risk windows for surgical events under Node v${nodeNum}.0.", "Operating periods of dusthana lords activate themes of illness and hospitalization, marking temporal windows when medical interventions are most likely to occur.", "Transiting Mars passing over natal malefics or dusthana houses serves as a primary transit trigger for timing surgical events.", "Saturn transits over sensitive natal markers or dusthana houses can bring chronic health issues to a head, forcing structural evaluations or surgical corrections.", "Transits of the lunar nodes through the 6th or 8th house induce karmic health shifts, triggering unconventional symptoms, accurate diagnoses, or unexpected procedures.", "By aligning major dasha activations with fast-moving transit triggers (such as Mars or Sun passing through afflicted houses), astrologers isolate potential surgery windows.", "Sudden Mars-Rahu activations, unexpected 8th house triggers, and harsh malefic transits to the Moon or Ascendant point to urgent, emergency surgical events.", "Elective surgeries are indicated when benefic influences (Jupiter, Venus) are active, ensuring planned schedules and favorable recovery periods.", "Minor procedures typically involve 6th house influences or Ketu (cuts/laparoscopy), whereas major surgeries involve heavy 8th house activation and major malefic afflictions.", "Zodiac signs rule specific body parts—Aries rules the head, Taurus the throat, Scorpio reproductive organs—guiding the anatomical focus of surgery under Node v${nodeNum}.0.", "The sign occupied by Mars dictates the anatomical domain; fiery signs intensify inflammation, while earthy signs target bones, teeth, or skin structures.", "The Moon reflects the mind, bodily fluids, and general vitality. Its transit relative to surgery dates helps determine emotional readiness and physical equilibrium.", "An afflicted or waning Moon often correlates with heightened anxiety, post-operative emotional distress, slow recovery, or fluid retention concerns.", "Jupiter acts as the great healer and protector. Its benefic aspects to surgical indicators or recovering houses ensure successful medical outcomes and smooth recovery.", "Benefic aspects (from Jupiter, Venus, or Mercury) to dusthana houses mitigate trauma, reduce complications, and promote rapid healing under Node v${nodeNum}.0.", "Severe afflictions from Saturn, Rahu, or Mars combined with an afflicted 8th house or weak Moon can point to post-operative complications or delayed healing.", "Divisional charts like Navamsa (D-9) provide deeper underlying strength and destiny markers regarding health crises and overall constitutional resilience.", "The Drekkana (D-3) chart is vital in Vedic astrology for assessing specific body parts, physical injuries, trauma proneness, and surgical vulnerabilities.", "The D-60 chart fine-tunes past-life karmic influences, chronic health conditions, and severe medical events or sudden life-altering surgeries.", "Potential must first exist in the natal chart (dusthana/Mars connections), while the current dasha acts as the temporal key opening the window for the event to manifest.", "Surgical indicators require sharp, fiery agents (Mars, Ketu, 8th house) denoting cutting, whereas purely medical treatments highlight milder 6th house influences or healing benefics.", "The strength of Jupiter, the condition of the Ascendant lord, and benefic aspects to the 8th house offer insights into successful surgical outcomes and smooth recuperation.", "Auspicious dates avoid waning moon phases and harsh lunar nodes, favoring strong benefics, favorable nakshatras, and supportive transiting planetary hours.", "Healing nakshatras (like Ashwini, Revati, Hasta), waxing moon phases, and strong planetary hours (such as Jupiter or Venus hora) are traditionally preferred for elective medical procedures.", "An astrologer must cross-verify natal afflictions, active dashas, supportive transit triggers, and divisional chart confirmations under Node v${nodeNum}.0 before concluding a strong surgical likelihood."];
+const CHAKRA_ROWS = [["Node v2.0", "Root Chakra (Muladhara)", "Bone Marrow, Muscles, Genitals, Blood", "Utilize grounding meditation and earth connection exercises to reduce inflammation and support tissue regeneration."], ["Node v3.0", "Sacral Chakra (Svadhisthana)", "Stomach, Lymphatics, Left Eye, Breasts", "Engage in fluid movement therapies and hydration balancing to regulate fluid retention and lymphatics."], ["Node v4.0", "Solar Plexus Chakra (Manipura)", "Heart, Spine, Upper Back, Arteries", "Practice core-strengthening breathwork and use yellow light visualization to boost life-force and micro-circulation."], ["Node v5.0", "Heart Chakra (Anahata)", "Kidneys, Skin, Throat, Venous System", "Perform compassion-focused heart-opening practices to balance renal filtration and skin integrity."], ["Node v6.0", "Throat Chakra (Vishuddha)", "Nervous System, Thyroid, Lungs, Intestines", "Incorporate sound healing and vocal toning to calm nervous tension and stabilize neurotransmitters."], ["Node v7.0", "Third Eye Chakra (Ajna)", "Liver, Arteries, Adipose Tissues, Hips", "Practice deep meditation and light-focus concentration to optimize hepatic filtration cycles."], ["Node v8.0", "Crown Chakra (Sahasrara)", "Bones, Teeth, Joints, Gallbladder, Spleen", "Focus on stillness and crown meditation to relieve joint pressure and strengthen skeletal resilience."]];
+const LETTER_MAP = {a:1,j:1,s:1,b:2,k:2,t:2,c:3,l:3,u:3,d:4,m:4,v:4,e:5,n:5,w:5,f:6,o:6,x:6,g:7,p:7,y:7,h:8,q:8,z:8,i:9,r:9};
+const CHALDEAN_MAP = {A:1,B:2,C:3,D:4,E:5,F:8,G:3,H:5,I:1,J:1,K:2,L:3,M:4,N:5,O:7,P:8,Q:1,R:2,S:3,T:4,U:6,V:6,W:6,X:5,Y:1,Z:7};
+const VOWELS = new Set(["a","e","i","o","u"]);
+
+function reduce9(n){ n=Math.abs(Number(n)||0); if(n===0)return 9; while(n>9)n=String(n).split("").reduce((a,d)=>a+Number(d),0); return n; }
+function sumDigits(n){ return String(n).replace(/\D/g,"").split("").reduce((a,d)=>a+Number(d),0); }
+function dateParts(){const d=new Date(document.getElementById("birthDate").value+"T00:00:00");return {d,day:d.getDate(),month:d.getMonth()+1,year:d.getFullYear(),weekday:d.getDay()};}
+function ageFrom(d){const t=new Date();let a=t.getFullYear()-d.getFullYear();if(t.getMonth()<d.getMonth()||(t.getMonth()===d.getMonth()&&t.getDate()<d.getDate()))a--;return a;}
+function fmtDate(d){return new Intl.DateTimeFormat("en-IN",{day:"2-digit",month:"short",year:"numeric"}).format(d);}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));}
+function setWidth(id,p){const e=document.getElementById(id);if(e)e.style.width=Math.max(0,Math.min(100,p))+"%";}
+function populateTimeSelectors(){const h=document.getElementById("birthHour"),m=document.getElementById("birthMinute");if(!h||!m)return;for(let i=1;i<=12;i++)h.insertAdjacentHTML("beforeend",`<option value="${String(i).padStart(2,"0")}">${i}</option>`);for(let i=0;i<60;i++)m.insertAdjacentHTML("beforeend",`<option value="${String(i).padStart(2,"0")}">${String(i).padStart(2,"0")}</option>`);} 
+populateTimeSelectors();
+
+function metricCard(title,num,caption,score){return `<div class="metric"><div class="k">${title}</div><div class="num">${num}</div><div class="caption">${caption}</div><div class="meter"><div class="meter-head"><span>Meter</span><span>${score}%</span></div><div class="meter-track"><div class="meter-fill" style="width:${score}%"></div></div><div class="meter-score">${score}%</div></div></div>`;}
+function therapyCard(label,n){const m=CTN_MAP[n]; if(!m)return ""; return `<div class="therapy"><div class="therapy-num">${label}: ${n}</div><p><strong>Source target:</strong> ${m[0]}</p><p><strong>Source-specified therapeutic word:</strong> ${m[1]}</p><p><strong>Complementary execution:</strong> Write the selected word in uppercase block letters, in red ink, on ruled paper, one word per line, using the dosage level appropriate to the issue.</p><small>CTN thesis basis: one-to-one alignment is explicitly published for HTN; domain-specific overlays elsewhere in this report are labelled as general CTN applications.</small></div>`;}
+function scoreFrom9(n){return Math.round((n/9)*100);}
+function renderMetrics(elId, items){document.getElementById(elId).innerHTML=items.map(x=>metricCard(x[0],x[1],x[2],x[3])).join("");}
+
+const birthDateEl = document.getElementById("birthDate");
+if(birthDateEl){
+  birthDateEl.addEventListener("change",()=>{
+   const {d,weekday}=dateParts(); 
+   document.getElementById("age").value=ageFrom(d);
+   document.getElementById("birthDay").value=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][weekday];
+  });
+}
+
+const masterFormEl = document.getElementById("masterForm");
+if(masterFormEl){
+  masterFormEl.addEventListener("submit",e=>{e.preventDefault();generateReport();});
+}
+
+function showFormError(message){const box=document.getElementById("formError");if(box){box.textContent=message;box.style.display="block";}}
+function clearFormError(){const box=document.getElementById("formError");if(box){box.textContent="";box.style.display="none";}}
+
+function generateReport(){
+ clearFormError();
+ const form=document.getElementById("masterForm");
+ if(!form.checkValidity()){form.reportValidity();showFormError("Please complete all required inputs before generating the report.");return;}
+ const name=document.getElementById("birthName").value.trim();
+ const {d,day,month,year,weekday}=dateParts();
+ const age=ageFrom(d);
+ const hour=document.getElementById("birthHour").value;
+ const minute=document.getElementById("birthMinute").value;
+ const time=hour+":"+minute;
+ const ampm=document.getElementById("ampm").value;
+ const lat=Number(document.getElementById("latitude").value);
+ const lon=Number(document.getElementById("longitude").value);
+ if(!name||!hour||!minute||!Number.isFinite(lat)||!Number.isFinite(lon)){showFormError("Please complete all required inputs before generating the report.");return;}
+ document.getElementById("age").value=age;
+ document.getElementById("birthDay").value=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][weekday];
+ document.getElementById("prescriptionDate").textContent=fmtDate(new Date());
+
+ renderSummary(name,d,age,time,ampm,lat,lon,weekday);
+ const clinical=calcClinical(name,d,age);
+ renderClinical(clinical);
+ renderClinicalTherapy(clinical);
+ const surgical=calcSurgical(name,d,time,ampm,lat,lon,weekday);
+ renderSurgical(surgical);
+ renderSurgicalTherapy(surgical);
+ const disease=calcDisease(d);
+ renderDisease(disease);
+ renderDomainTherapy("diseaseTherapy","Disease Trajectory Number",disease.dtn,"Disease Statistics Number",disease.dsn,"Disease Analytics Number",disease.dan);
+ const loshu=calcLoShu(name,d);
+ renderLoShu(loshu);
+ const wealth=calcWealth(name,d,weekday,age);
+ renderWealth(wealth);
+ renderDomainTherapy("wealthTherapy","Wealth Trajectory Number",wealth.wt,"Wealth Statistics Number",wealth.ws,"Wealth Analytics Number",wealth.wa);
+ const growth=calcGrowth(name,d,age);
+ renderGrowth(growth);
+ renderDomainTherapy("growthTherapy","Growth Trajectory Number",growth.gt,"Growth Statistics Number",growth.gs,"Growth Analytics Number",growth.ga);
+ const dasha=calcDasha(d,weekday,age);
+ renderDasha(dasha);
+ renderDashaTherapy(dasha);
+ document.getElementById("ctnTableBody").innerHTML=Object.entries(CTN_MAP).map(([n,v])=>`<tr><td>${n}</td><td>${esc(v[0])}</td><td><strong>${esc(v[1])}</strong></td></tr>`).join("");
+ document.getElementById("report").classList.remove("hidden");
+ window.scrollTo({top:document.getElementById("report").offsetTop-10,behavior:"smooth"});
+}
+
+function renderSummary(name,d,age,time,ampm,lat,lon,weekday){
+ const dayName=["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][weekday];
+ document.getElementById("summaryDetails").innerHTML=[
+  ["Birth Name",name],["Birth Date",fmtDate(d)],["Current Age",age+" years"],["Birth Time",time+" "+ampm],
+  ["Birth Day",dayName],["Birth Place Latitude",lat],["Birth Place Longitude",lon],["Report Date",fmtDate(new Date())]
+ ].map(x=>`<div class="summary-item"><div class="k">${x[0]}</div><div class="v">${esc(x[1])}</div></div>`).join("");
+}
+
+function calcClinical(name,d,age){
+ const day=d.getDate(),month=d.getMonth()+1,year=d.getFullYear();
+ const lifePath=reduce9(reduce9(month)+reduce9(day)+reduce9(year));
+ const ht=reduce9(lifePath+1);
+ const p1=reduce9(month+day),p2=reduce9(day+year),p3=reduce9(p1+p2),p4=reduce9(month+year);
+ const p1End=36-lifePath,p2End=p1End+9,p3End=p2End+9;
+ let active=p1;if(age<=p1End)active=p1;else if(age<=p2End)active=p2;else if(age<=p3End)active=p3;else active=p4;
+ const hs=reduce9(active+1);
+ const c1=Math.abs(reduce9(month)-reduce9(day)),c2=Math.abs(reduce9(day)-reduce9(year)),c3=Math.abs(c1-c2);
+ let raw=c3-1;if(raw<=0)raw+=9;const ha=reduce9(raw);
+ return {lifePath,ht,hs,ha,age,day,month,year,systems:[CLINICAL_SYSTEMS[ht],CLINICAL_SYSTEMS[hs],CLINICAL_SYSTEMS[ha]]};
+}
+function renderClinical(c){
+ const score=n=>Math.min(98,Math.max(35,Math.round(((10-n)*11.1))));
+ const clinicalScore=Math.min(Math.max(Math.round((((10-c.ht)*3)+((10-c.hs)*4)+((10-c.ha)*3))*3.33),35),98);
+ renderMetrics("clinicalMetrics",[
+  ["Health Trajectory Number",c.ht,"Long Term Health Condition",score(c.ht)],
+  ["Health Statistics Number",c.hs,"Current Health Situation",score(c.hs)],
+  ["Health Analytics Number",c.ha,"Future Health Prediction",score(c.ha)],
+  ["Clinical Resiliency Score",clinicalScore+"/100","Source clinical overall gauge",clinicalScore]
+ ]);
+ document.getElementById("clinicalInsights").innerHTML=[
+  ["Historical Health Pattern",`Health Trajectory Number ${c.ht} is associated in the attached clinical calculator with ${c.systems[0]}. Historical sensitivities are described as recurring patterns during major cycle transitions; the calculator frames this as a long-term constitutional profile.`],
+  ["Recurring Health Patterns",`The source clinical dashboard links recurring patterns to active numerological cycles and recommends attention to the system profile associated with Health Trajectory Number ${c.ht}.`],
+  ["Historical Recovery Windows",`The source calculator describes pinnacle-transition windows as periods requiring greater recovery attention, rest, and routine consistency.`],
+  ["Current Vitality",`Health Statistics Number ${c.hs} is associated with ${c.systems[1]}. The source describes current vitality as dynamic and emphasizes disciplined daily rhythm.`],
+  ["Active Sensitivity Signals",`The source clinical dashboard emphasizes stress management, adequate sleep, hydration, preventive care and avoiding excessive exertion during sensitive current cycles.`],
+  ["Current Focus Areas",`For the current profile, the attached calculator highlights ${c.systems[1]} as the area requiring focused self-care.`],
+  ["Upcoming Wellbeing Shifts",`Health Analytics Number ${c.ha} is associated with ${c.systems[2]}. The source frames the future window as a period for updated wellness habits and dietary adjustments.`],
+  ["Favorable Recovery Periods",`The source describes favorable periods as those aligned with supportive personal cycles and encourages structured recovery and strengthening routines.`],
+  ["Caution Periods",`The source recommends extra caution around high-stress cycles, emphasizing rest to reduce fatigue and stress-related inflammatory burden.`],
+  ["Comprehensive Synthesis",`Trajectory ${c.ht}, Statistics ${c.hs}, and Analytics ${c.ha} are read together as a long-term, current, and future health framework. The attached clinical calculator describes resilient recovery capacity when lower-strain periods are respected.`]
+ ].map(x=>`<div class="qa"><div class="q">${x[0]}</div><div class="a">${x[1]}</div></div>`).join("");
+}
+function renderClinicalTherapy(c){
+ document.getElementById("clinicalTherapy").innerHTML=[
+  therapyCard("Health Trajectory / Long Term",c.ht),
+  therapyCard("Health Statistics / Current",c.hs),
+  therapyCard("Health Analytics / Future",c.ha)
+ ].join("");
+}
+
+function calcSurgical(name,d,time,ampm,lat,lon,weekday){
+ let [h,m]=time.split(":").map(Number);if(ampm==="PM"&&h<12)h+=12;if(ampm==="AM"&&h===12)h=0;
+ let gmt=h+m/60-(lon/15);if(gmt<0)gmt+=24;if(gmt>=24)gmt-=24;
+ const gh=Math.floor(gmt),gm=Math.round((gmt-gh)*60);
+ const dayMap={0:1,1:2,2:3,3:4,4:5,5:6,6:7};
+ const hora=((dayMap[weekday]+gh)%7)+1;const node=hora+1;
+ const risk=Math.min(Math.max((node*9.5)+Math.abs(lat*.2),15),98);
+ let prediction=risk<40?"Low surgical stress threshold detected. High resilience index for tissue regeneration. Standard minimally invasive interventions carry optimal recovery indicators.":risk<75?"Moderate systemic reactivity index. Cellular recovery cycles require precise post-operative monitoring. Schedule elective procedures during optimal circadian alignment phases.":"Elevated neuro-vascular vulnerability score. High-precision anesthetic timing and extended hemodynamic tracking strongly recommended for any critical surgical procedures.";
+ return {gmt:`${String(gh).padStart(2,"0")}:${String(Math.min(gm,59)).padStart(2,"0")} GMT`,hora,node,risk,prediction};
+}
+function renderSurgical(s){
+ document.getElementById("surgicalTop").innerHTML=[
+  ["Corrected GMT Time",s.gmt,"Longitude-corrected time reference",100],
+  ["Assigned Hora Number",s.hora,"Birth-day/time sequence",scoreFrom9(s.hora)],
+  ["Body Graph Matrix Value","v"+s.node+".0","Active matrix node",scoreFrom9(s.node-1)],
+  ["Vulnerability Index",s.risk.toFixed(1)+"/100","Surgical Risk & Stress Threshold",s.risk]
+ ].map(x=>metricCard(x[0],x[1],x[2],x[3])).join("");
+ document.getElementById("surgicalPrognosis").innerHTML=`<span class="badge">Matrix Node v${s.node}.0</span><p><strong>Surgical Prediction Analysis:</strong> ${s.prediction}</p><p class="small-note">Source calculator disclaimer: astrology cannot reliably determine whether someone needs surgery, predict surgical complications, or replace a surgeon's medical assessment. Real surgical decisions should come from a qualified medical professional.</p>`;
+ const norm = ((s.node - 1) % 9) + 1;
+const pool = [1, 2, 3, 4, 5, 6, 7, 8, 9].filter(x => x !== norm);
+
+// Standard 3x3 Lo Shu / Numeroscope House layout mapping to houses 1 through 9
+// House 5 is the center core node (norm), and houses 1-4, 6-9 map around it in standard grid sequence.
+const matrixCells = [
+  { house: 1, num: pool[0] },
+  { house: 2, num: pool[1] },
+  { house: 3, num: pool[2] },
+  { house: 4, num: pool[3] },
+  { house: 5, num: norm, center: true },
+  { house: 6, num: pool[7] },
+  { house: 7, num: pool[6] },
+  { house: 8, num: pool[5] },
+  { house: 9, num: pool[4] }
+];
+
+document.getElementById("numeroscope").innerHTML = matrixCells.map(cell => `
+  <div class="matrix-cell">
+    <div class="house">House ${cell.house}${cell.center ? " • Center" : ""}</div>
+    <div class="n">${cell.num}</div>
+  </div>
+`).join("");
+ document.getElementById("chakraTable").innerHTML=`<table><thead><tr><th>Matrix Node</th><th>Chakra Predictor / Influence</th><th>Target Organs & Systems</th><th>Chakra Healing & Balancing Remedy</th></tr></thead><tbody>${CHAKRA_ROWS.map(r=>`<tr><td>${r[0]}</td><td>${r[1]}</td><td>${r[2]}</td><td>${r[3]}</td></tr>`).join("")}</tbody></table>`;
+ document.getElementById("housePredictions").innerHTML=[
+  {slot:"House 5 (Center Matrix Core)",num:norm},
+  {slot:"House 1 (Top-Left)",num:pool[0]},{slot:"House 2 (Top-Center)",num:pool[1]},{slot:"House 3 (Top-Right)",num:pool[2]},
+  {slot:"House 4 (Mid-Right)",num:pool[3]},{slot:"House 9 (Bottom-Right)",num:pool[4]},{slot:"House 8 (Bottom-Center)",num:pool[5]},
+  {slot:"House 7 (Bottom-Left)",num:pool[6]},{slot:"House 6 (Mid-Left)",num:pool[7]}
+ ].map(x=>`<div class="house"><div class="badge">${x.slot}</div><h4 style="margin:9px 0;color:var(--gold)">Number ${x.num}</h4><div><strong>${HOUSE_DATA[x.num][0]}</strong></div><p class="small-note">${HOUSE_DATA[x.num][1]}</p></div>`).join("");
+ document.getElementById("surgicalAnswers").innerHTML=SURGICAL_ANSWERS.map((a,i)=>`<div class="qa"><div class="q">Matrix Node v${s.node}.0 • Surgical & Medical Astrology Answer ${i+1}</div><div class="a">${a.replaceAll("${nodeNum}",s.node)}</div></div>`).join("");
+}
+function renderSurgicalTherapy(s){
+ const n=Math.min(9,Math.max(1,s.node));const houses=[6,8,12];
+ document.getElementById("surgicalTherapy").innerHTML=[
+  therapyCard(`Active Body Graph Node v${s.node}.0`,n),
+  ...houses.map(h=>`<div class="therapy"><div class="therapy-num">House ${h} • CTN Overlay</div><p><strong>Source surgical focus:</strong> House ${h===6?"6 — injuries, infections, wounds and daily health stressors":h===8?"8 — transformation, trauma and major operative themes":"12 — hospitalization, operating theatres and recovery beds"}.</p><p><strong>Complementary CTN approach:</strong> Use the CTN word associated with the active node number as a non-invasive structured writing exercise, following the research-paper protocol.</p></div>`)
+ ].join("");
+}
+
+function calcDisease(d){
+ const day=reduce9(sumDigits(d.getDate())),month=reduce9(sumDigits(d.getMonth()+1)),cy=reduce9(sumDigits(new Date().getFullYear()));
+ const pyn=reduce9(day+month+cy),cm=reduce9(sumDigits(new Date().getMonth()+1)),pmn=reduce9(pyn+cm);
+ return {dtn:reduce9(day+1),dsn:reduce9(pmn+1),dan:reduce9(pyn+1)};
+}
+function renderDisease(x){
+ renderMetrics("diseaseMetrics",[
+  ["Disease Trajectory Number",x.dtn,"Long Term Diseases",scoreFrom9(x.dtn)],
+  ["Disease Statistics Number",x.dsn,"Current Diseases",scoreFrom9(x.dsn)],
+  ["Disease Analytics Number",x.dan,"Future Diseases",scoreFrom9(x.dan)]
+ ]);
+ document.getElementById("diseaseInsights").innerHTML=[
+  ["Long Term Diseases",HEALTH_PRED[x.dtn]],["Current Diseases",HEALTH_PRED[x.dsn]],["Future Diseases",HEALTH_PRED[x.dan]]
+ ].map((item,i)=>`<div class="qa"><div class="q">${item[0]} • Number ${[x.dtn,x.dsn,x.dan][i]}</div><div class="a">${item[1]}</div></div>`).join("");
+}
+function renderDomainTherapy(id,a,n,b,m,c,k){document.getElementById(id).innerHTML=[therapyCard(a,n),therapyCard(b,m),therapyCard(c,k)].join("");}
+
+function calcLoShu(name,d){
+ const day=d.getDate(),month=d.getMonth()+1,year=d.getFullYear();const driver=reduce9(day), conductor=reduce9(sumDigits(`${String(day).padStart(2,"0")}${String(month).padStart(2,"0")}${year}`));
+ const clean=name.toUpperCase().replace(/[^A-Z]/g,"");let ns=0;for(const ch of clean)ns+=CHALDEAN_MAP[ch]||0;const nameNum=reduce9(ns);
+ const g={1:0,2:0,3:0,4:0,5:0,6:0,7:0,8:0,9:0};for(const ch of `${String(day).padStart(2,"0")}${String(month).padStart(2,"0")}${year}`){if(ch!=="0")g[ch]++}
+ const missing=[];for(let i=1;i<=9;i++)if(!g[i])missing.push(i);const present=9-missing.length;return {g,driver,conductor,nameNum,missing,present,score:Math.round(present/9*100)};
+}
+function renderLoShu(l){
+ const positions=[[8,1,6],[3,5,7],[4,9,2]];
+ document.getElementById("loshuGrid").innerHTML=positions.flat().map(n=>`<div class="matrix-cell"><div class="house">${n===5?"Center":"Value"}</div><div class="n">${String(n).repeat(l.g[n])||"—"}</div><div class="small-note">Count: ${l.g[n]}</div></div>`).join("");
+ document.getElementById("loshuBadges").innerHTML=`<span class="badge">Driver ${l.driver}</span><span class="badge">Conductor ${l.conductor}</span><span class="badge">Name Number ${l.nameNum}</span><span class="badge">Missing: ${l.missing.length?l.missing.join(", "):"None"}</span>`;
+ document.getElementById("loshuScore").textContent=l.score+"%";
+ document.getElementById("loshuNeedle").style.transform=`rotate(${-90+1.8*l.score}deg)`;
+ document.getElementById("loshuStatus").textContent=l.score>=75?"Exceptional Dynamic Balance & High Potential":l.score>=50?"Balanced Grid — Strong Core Talents with Key Focus Areas":"Specialized Profile — Needs Focused Number & Elemental Attention";
+ document.getElementById("loshuSummary").textContent=`Your Lo Shu Grid manifests ${100-l.score}% specialized energy gaps and ${l.score}% active grid coverage. Driver ${l.driver} and Conductor ${l.conductor} shape the structural profile across Mental, Emotional and Practical planes.`;
+ 
+ renderPastQuestions(l.g,l.driver,l.conductor,l.missing);
+ renderPresentQuestions(l.g,l.driver,l.conductor,l.missing,l.nameNum);
+ renderFutureQuestions(l.g,l.driver,l.conductor,l.missing);
+ 
+ document.getElementById("loshuTherapy").innerHTML=l.missing.length?l.missing.map(n=>therapyCard(`Missing Value ${n}`,n)).join(""):`<div class="therapy"><div class="therapy-num">No Missing Values</div><p>The Personal Lo Shu Grid contains all nine values. No missing-value CTN overlay is required by this report.</p></div>`;
+}
+
+function renderQACards(targetId,dataArray){
+  const c=document.getElementById(targetId);
+  if(!c) return;
+  c.innerHTML=dataArray.map(x=>`<div class="qa"><div class="q">${x.q}</div><div class="a">${x.a}</div></div>`).join("");
+}
+
+function renderPastQuestions(g, driver, conductor, missing) {
+  const pastData = [
+    { q: "What innate talents were indicated by my birth-date numbers?", a: `Your birth numbers highlight innate strengths derived from Psychic Number ${driver}. ${g[1] ? 'Strong leadership and self-reliance (Number 1). ' : ''}${g[2] ? 'Deep emotional sensitivity and diplomacy (Number 2). ' : ''}${g[3] ? 'Creative expression and knowledge retention (Number 3). ' : ''}${g[5] ? 'Natural adaptability and balance (Number 5).' : ''}` },
+    { q: "Which talents were strongest in my childhood?", a: `In childhood, your Psychic Number (${driver}) was your primary driver. ${driver === 1 || driver === 3 ? 'You displayed high independence, early vocal abilities, or artistic flair.' : driver === 2 || driver === 6 ? 'You were highly observant, artistic, empathetic, and sensitive to family harmony.' : 'You demonstrated analytical curiosity, structured habits, or athletic drive from an early age.'}` },
+    { q: "Which personal abilities did I naturally develop in my early years?", a: `Early years fostered your active grid planes. ${g[4] && g[9] && g[2] ? 'Your Mind Plane (4-9-2) gave you sharp memory and intellectual agility early on.' : ''}${g[3] && g[5] && g[7] ? 'Your Emotional Plane (3-5-7) allowed deep intuitive understanding.' : ''}${g[8] && g[1] && g[6] ? 'Your Practical Plane (8-1-6) made you grounded and execution-oriented.' : 'You naturally relied on trial and error to build resilience.'}` },
+    { q: "Which talents may have remained hidden or underdeveloped?", a: `Talents associated with missing numbers (${missing.join(', ') || 'None'}) required extra effort. ${missing.includes(5) ? 'Central stability and adaptability may have been hidden. ' : ''}${missing.includes(6) ? 'Luxury management, high artistic design, or self-pampering were latent. ' : ''}${missing.includes(7) ? 'Intuitive self-trust took time to surface.' : 'Your core talents were readily accessible.'}` },
+    { q: "What does my Lo Shu Grid reveal about my childhood personality?", a: `Your grid reveals a childhood marked by ${g[9] ? 'high mental energy and passion, ' : ''}${g[5] ? 'centered stability, ' : ''}${g[2] ? 'high sensitivity to surrounding moods, ' : ''}shaping how you interacted with peers and authority figures.` },
+    { q: "Which missing numbers may have created challenges in developing my talents?", a: `Missing number(s) ${missing.length ? missing.join(', ') : 'none'} created specific blind spots. ${missing.includes(4) ? 'Lack of 4 may have caused initial struggles with discipline or organization. ' : ''}${missing.includes(8) ? 'Missing 8 may have caused early financial or executive decision hesitation.' : 'You had a well-rounded baseline.'}` },
+    { q: "Which repeated numbers indicate natural strengths or exceptional abilities?", a: Object.keys(g).filter(k => g[k] > 1).length ? `Repeated digits ${Object.keys(g).filter(k => g[k] > 1).map(k => `${k} (x${g[k]})`).join(', ')} point to intense, amplified talents—such as hyper-focus, heightened intuition, or strong authority—that dominated your early experiences.` : "You have single occurrences of numbers, showing a balanced distribution of energy without intense single-point fixations." },
+    { q: "What past experiences were likely to activate my strongest talents?", a: `High-pressure situations, competitive environments, dynamic travel, or solitary creative projects were pivotal triggers that activated your Conductor (${conductor}) energy.` },
+    { q: "Which talents may I have overlooked or undervalued in the past?", a: `You may have taken for granted your natural ability in ${g[3] ? 'teaching/counseling, ' : ''}${g[7] ? 'analytical reflection, ' : ''}${g[1] ? 'independent execution, ' : ''}assuming everyone possessed these qualities.` },
+    { q: "What karmic or past-life tendencies are suggested by my numerological pattern?", a: `Your missing numbers (${missing.join(', ')}) represent karmic lessons left incomplete in past cycles—specifically learning ${missing.includes(1) ? 'self-expression, ' : ''}${missing.includes(2) ? 'emotional patience, ' : ''}${missing.includes(5) ? 'inner stability, ' : 'mastery over physical material resources.'}` }
+  ];
+  renderQACards('pastQA', pastData);
+}
+
+function renderPresentQuestions(g, driver, conductor, missing, nameNum) {
+  const arrow159 = g[1] && g[5] && g[9] ? "ACTIVE (Arrow of Determination & Success)" : "Incomplete";
+  const arrow357 = g[3] && g[5] && g[7] ? "ACTIVE (Arrow of Compassion & Spirituality)" : "Incomplete";
+  const arrow258 = g[2] && g[5] && g[8] ? "ACTIVE (Arrow of Emotional Balance & Real Estate/Property)" : "Incomplete";
+
+  const presentData = [
+    { q: "What are my strongest personal talents according to my current Lo Shu Grid?", a: `Your primary active numbers provide a core advantage in ${g[9] ? 'Vision & Leadership (9), ' : ''}${g[5] ? 'Center Balance & Business (5), ' : ''}${g[1] ? 'Career Execution (1), ' : ''}${g[3] ? 'Knowledge & Communication (3).' : 'specialized focus areas.'}` },
+    { q: "Which numbers give me an advantage over others?", a: `Your Conductor Number ${conductor} paired with active digits gives you an edge in strategic foresight and distinct personal charisma (Name No. ${nameNum}).` },
+    { q: "What unique combination of numbers defines my personality and abilities?", a: `The triad of Driver ${driver}, Conductor ${conductor}, and Name Number ${nameNum} builds a dynamic archetype: bridging raw instincts with long-term destiny execution.` },
+    { q: "Which professional or creative talents are currently most active?", a: `${g[6] || g[3] ? 'Creative design, artistic expression, and consulting ' : 'Strategic analysis, problem solving, and structured execution '}are currently at peak operational frequency.` },
+    { q: "Which hidden talents should I consciously develop now?", a: `Focus on developing attributes of missing digits (${missing.join(', ')}). Building systematic routines and energetic grounding will unlock immediate performance boosts.` },
+    { q: "What does the 1-5-9 arrow indicate about my determination and achievement potential?", a: `Status: ${arrow159}. ${g[1]&&g[5]&&g[9] ? 'You possess relentless determination; once you set a target, you overcome any obstacle.' : 'Work on maintaining long-term momentum when executing major personal projects.'}` },
+    { q: "What does the 3-5-7 arrow reveal about my intuitive or spiritual abilities?", a: `Status: ${arrow357}. ${g[3]&&g[5]&&g[7] ? 'You possess deep spiritual insight, strong emotional intelligence, and natural healing energy.' : 'Cultivate meditation or self-reflection to sharpen your subconscious instincts.'}` },
+    { q: "What does the 2-5-8 arrow say about my emotional and mental balance?", a: `Status: ${arrow258}. ${g[2]&&g[5]&&g[8] ? 'You have exceptional emotional stability, mental strength, and success in real estate/property matters.' : 'Avoid emotional decision-making by anchoring your goals with clear factual metrics.'}` },
+    { q: "Which missing numbers currently create weaknesses or blind spots?", a: `Missing digits [${missing.join(', ')}] can manifest as ${missing.includes(5) ? 'restlessness, ' : ''}${missing.includes(6) ? 'underestimating luxury/branding, ' : ''}${missing.includes(8) ? 'money management delays.' : 'minor operational friction.'}` },
+    { q: "Which planes of the Lo Shu Grid are strongest for me—mental, emotional, or practical?", a: `Mental Plane (4-9-2): ${ (g[4]&&g[9]&&g[2])?'Strong':'Partial' } | Emotional Plane (3-5-7): ${ (g[3]&&g[5]&&g[7])?'Strong':'Partial' } | Practical Plane (8-1-6): ${ (g[8]&&g[1]&&g[6])?'Strong':'Partial' }.` },
+    { q: "How do my Lo Shu numbers influence my communication and self-expression?", a: `${g[1] ? 'Number 1 provides clear verbal clarity. ' : ''}${g[3] ? 'Number 3 adds eloquence and wisdom. ' : ''}${g[2] ? 'Number 2 ensures empathetic listening.' : 'You communicate with directness and utility.'}` },
+    { q: "How do my numbers affect creativity, leadership, analysis, or problem-solving?", a: `Leadership is fueled by ${g[9]?'9 (Fire) ':'Conductor energy '}, analysis by ${g[4]||g[8]?'4/8 (Earth/Wood) ':'logic '}, and creativity by ${g[3]||g[6]?'3/6 (Wood/Metal)':'inner innovation'}.` },
+    { q: "Am I naturally better suited to independent work or teamwork?", a: `${driver === 1 || driver === 9 || g[1] > 1 ? 'Independent work, leadership roles, or entrepreneurship suit you best.' : 'You thrive exceptionally well in collaborative, team-oriented, or diplomatic environments.'}` },
+    { q: "Which types of careers or occupations best align with my personal talents?", a: `Top alignments: ${conductor === 1 ? 'Executive Management, Politics, Entrepreneurship' : conductor === 2 ? 'Diplomacy, Psychology, Arts' : conductor === 3 ? 'Teaching, Law, Finance, Research' : conductor === 4 ? 'Technology, Systems Architecture, Engineering' : conductor === 5 ? 'Commerce, Media, Marketing, Public Relations' : conductor === 6 ? 'Luxury Goods, Entertainment, Hospitality' : conductor === 7 ? 'Research, Analytics, Mysticism, Software' : conductor === 8 ? 'Real Estate, Banking, Heavy Industry, Administration' : 'Social Work, Sports, Defense, Innovation'}.` },
+    { q: "What personal habits could prevent my talents from reaching their full potential?", a: `Inconsistency, procrastination in absent number areas, or over-analyzing without swift action can impede your growth trajectory.` }
+  ];
+  renderQACards('presentQA', presentData);
+}
+
+function renderFutureQuestions(g, driver, conductor, missing) {
+  const futureData = [
+    { q: "Which talents are likely to become more important as I grow older?", a: `Your Conductor Number ${conductor} activates more strongly in mature years, driving long-term administrative, strategic, and wisdom-oriented leadership.` },
+    { q: "What abilities should I develop now for future success?", a: `Systematic wealth management (8), strategic networking (6), and digital adaptability (4/5) are key competencies to nurture today.` },
+    { q: "Which periods of life may bring greater recognition of my talents?", a: `Major life cycles aligned with personal years reducing to ${driver}, ${conductor}, or ${g[5] ? '5' : '9'} will bring peak visibility, promotions, and recognition.` },
+    { q: "Are there future opportunities where my natural abilities could become financially valuable?", a: `Yes—monetizing specialized knowledge, consulting, real estate/assets, or creative intellectual property aligns with your grid composition.` },
+    { q: "Which untapped talent could potentially become my greatest strength?", a: `Activating your missing elements (${missing.join(', ')}) through conscious remedies will turn former blind spots into high-value competitive differentiators.` },
+    { q: "What future challenges could test my strongest abilities?", a: `Unexpected market shifts or energetic burnout from over-leveraging your dominant plane (${g[9]>1?'Over-assertiveness':g[1]>1?'Hyper-independence':'Over-analysis'}) may test your adaptability.` },
+    { q: "Which weaknesses shown by my Lo Shu Grid should I work on before they affect my future?", a: `Establish structures for missing digits—e.g., ${missing.includes(5) ? 'maintain lifestyle equilibrium, ' : ''}${missing.includes(6) ? 'upgrade professional personal branding, ' : ''}${missing.includes(8) ? 'enforce strict financial accounting.' : 'maintain life balance.'}` },
+    { q: "How might my personal numbers influence future career changes?", a: `Transitions will shift you from operational execution toward broad governance, advisory roles, entrepreneurship, or high-level strategic direction.` },
+    { q: "Is there potential for leadership, entrepreneurship, teaching, research, or creative work?", a: `High potential in ${driver===1||driver===9||conductor===1?'Executive Leadership & Entrepreneurship':driver===3||conductor===3?'Teaching, Research & Creative Writing':'Specialized Professional Innovation'}.` },
+    { q: "Which talents could help me achieve greater financial independence?", a: `Mastery of asset allocation (8), brand value creation (6), and strategic decision-making (5) will serve as your wealth engine.` },
+    { q: "How might my personality and talents evolve through different life stages?", a: `Youth focuses on skill acquisition and self-identity, mid-life builds structural authority, and later stages focus on mentorship, legacy, and systemic impact.` },
+    { q: "Which future decisions should be guided by my natural strengths rather than external expectations?", a: `Choose ventures that align with your core Driver (${driver}) instincts rather than following temporary societal trends or external peer pressure.` },
+    { q: "What combination of talents could give me a unique competitive advantage?", a: `Blending your core ${driver} drive with ${conductor} destiny vision allows you to solve complex problems that others find overwhelming.` },
+    { q: "What does my Lo Shu Grid suggest about my long-term personal growth?", a: `Your grid promises progressive evolutionary growth, transitioning from raw ambition into balanced, holistic mastery across physical and spiritual realms.` },
+    { q: "What is the overall past-present-future talent trajectory shown by my Personal Lo Shu Grid, and how can I best use it to fulfill my potential?", a: `Your trajectory transitions from early skill discovery (Past) into sharp practical execution (Present) and ultimate strategic mastery (Future). Fulfill this by applying the CTN writing protocol to address missing-number focus areas.` }
+  ];
+  renderQACards('futureQA', futureData);
+}
+
+function calcWealth(name,d,weekday,age){
+ const clean=name.toLowerCase();let dest=0,soul=0;for(const ch of clean){if(LETTER_MAP[ch]){dest+=LETTER_MAP[ch];if(VOWELS.has(ch))soul+=LETTER_MAP[ch]}}
+ const lifePath=reduce9(reduce9(d.getMonth()+1)+reduce9(d.getDate())+reduce9(d.getFullYear()));
+ dest=reduce9(dest);soul=reduce9(soul);
+ const month=d.getMonth()+1,day=d.getDate(),year=d.getFullYear();const p1=reduce9(month+day),p2=reduce9(day+year),p3=reduce9(p1+p2),p4=reduce9(month+year);
+ let active=p1;if(age>=27&&age<36)active=p2;else if(age>=36&&age<45)active=p3;else if(age>=45)active=p4;
+ const essence=reduce9(dest+age);const c1=Math.abs(month-day),c2=Math.abs(day-Math.floor(year/100)),c3=Math.abs(c1-c2);
+ return {lifePath,dest,soul,active,essence,c3,wt:reduce9(dest+lifePath+(weekday+1)+1),ws:reduce9(essence+active+(weekday+1)+1),wa:reduce9(Math.max(1,soul+c3+(weekday+1)-1))};
+}
+function renderWealth(w){
+ const power=Math.round(((w.wt+w.ws+w.wa)/27)*100);
+ renderMetrics("wealthMetrics",[
+  ["Wealth Trajectory Number",w.wt,"Long Term Wealth Condition",Math.min(100,power)],
+  ["Wealth Statistics Number",w.ws,"Current Wealth Situation",Math.min(100,power)],
+  ["Wealth Analytics Number",w.wa,"Future Wealth Prediction",Math.min(100,power)],
+  ["Financial Power Score",power+"%","Source financial overall gauge",power]
+ ]);
+ const trait={1:"pioneering leadership, independent ventures, and executive risk-taking",2:"strategic partnerships, diplomatic negotiations, and dual-income channels",3:"creative expansion, communication ventures, and brand building",4:"systematic real estate investment, disciplined savings, and rock-solid foundations",5:"dynamic trading, global markets, and adaptable investment strategies",6:"family legacy assets, luxury goods, and stable high-yield portfolios",7:"tech-driven investments, analytical research, and niche intellectual assets",8:"large-scale commercial enterprises, capital restructuring, and corporate authority",9:"humanitarian ventures, international trade, and wide-scale wealth distribution"};
+ const state=w.ws<=3?"Regrouping & Foundation Building":w.ws<=6?"Steady Acceleration & Active Cash-Flow Creation":"High Yield Expansion & Golden Harvest";
+ document.getElementById("wealthLong").textContent=`Your birth chart, governed by Wealth Trajectory Number ${w.wt} and Life Path ${w.lifePath}, is framed around ${trait[w.wt]}. The source financial calculator positions this as a long-term wealth-building tendency.`;
+ document.getElementById("wealthCurrent").textContent=`Wealth Statistics Number ${w.ws} places the current financial condition in a phase of ${state}. The source emphasizes consolidation, disciplined cash-flow management and active-cycle awareness.`;
+ document.getElementById("wealthFuture").textContent=`Wealth Analytics Number ${w.wa} is used by the source calculator as the future monetary expansion and financial uplift indicator, with its forecast framed around the next major cycle of expansion and financial uplift.`;
+ const qs=[
+ ["Past Financial Cycles","Past financial cycles were described as being influenced by Essence cycles and planetary transit periods, with major shifts recurring over multi-year intervals."],
+ ["Unexpected Expenses","The source links periods of instability to tension between the Soul Urge and Third Challenge context, describing temporary cash-flow disruption as a pivot toward higher-yield assets."],
+ ["Current Financial Phase",`Current condition: ${state}.`],
+ ["Income & Gains","The source highlights accumulated wealth and gains themes, while urging discipline around unbudgeted luxury expenditure."],
+ ["Next Expansion Window","The source financial calculator places the next major monetary expansion window within the next 8 to 14 months under favorable conditions."],
+ ["Caution Periods","The source recommends caution during lower-vibration transit months and against high-risk speculation or unsecured lending during those periods."],
+ ["Long-Term Security","The source describes compounding capacity for long-term security and stronger tangible-asset accumulation after mid-life."],
+ ["Favorable Dates","The source identifies dates reducing to 1, 3, 5 or 6 during Thursday and Friday planetary hours as favorable for major financial actions."],
+ ["10-Year Wealth Roadmap","Year 1: stabilization and systematic debt reduction. Year 3: breakthrough expansion and secondary income creation. Year 5: major asset acquisition. Year 10: financial autonomy and sustained passive yield."],
+ ["Wealth Trajectory","The financial dashboard frames Trajectory Number as the central long-term financial pattern and Statistics/Analytics as current and future context."]
+ ];
+ document.getElementById("wealthQA").innerHTML=qs.map(q=>`<div class="qa"><div class="q">${q[0]}</div><div class="a">${q[1]}</div></div>`).join("");
+}
+
+const GROWTH_QS={"Career": ["What major career turning points have I already experienced, and what planetary influences caused them?", "Why have I faced delays, changes, or instability in my career in the past?", "Which past career decisions were most aligned with my birth chart?", "What career opportunities did I miss or fail to recognize in the past?", "What is the current state of my career according to my birth chart and current planetary transits?", "What are my strongest natural career talents and professional strengths?", "Which career fields or professions are most suitable for me astrologically?", "What is currently blocking my career growth, recognition, or success?", "When is my next major career breakthrough or professional turning point likely?", "What does my long-term career trajectory look like, including growth, recognition, leadership, and stability?"], "Job": ["Why have I experienced job changes, job losses, dissatisfaction, or workplace conflicts in the past?", "Which previous jobs were most favorable for my growth and why?", "What patterns can astrology reveal about my past employers, colleagues, and workplace experiences?", "Is my current job suitable for me according to my horoscope?", "Should I continue in my current job or start looking for a new opportunity?", "How favorable is the present period for salary increases, promotions, or greater responsibilities?", "What does my chart indicate about my relationship with managers, colleagues, and workplace authority?", "When is the most favorable period for getting a new job or changing companies?", "When can I expect a promotion, salary increase, or major improvement in my professional position?", "Is my future more favorable for employment, leadership, freelancing, or independent professional work?"], "Business": ["What astrological factors explain my previous business successes or failures?", "What mistakes or recurring patterns should I learn from my past business experiences?", "Which previous business ventures or partnerships were astrologically favorable for me?", "Is the present time favorable for starting a new business?", "What type of business or industry is most suitable for me according to my horoscope?", "Should I run a business independently or with a partner?", "What does my chart indicate about my current financial and entrepreneurial potential?", "When is the best period for starting, expanding, or restructuring my business?", "What are the prospects for long-term business wealth, profitability, and financial independence?", "Are there future periods when I should be particularly careful about business losses, debts, partnerships, or major investments?"], "Education": ["What does my birth chart reveal about my past educational strengths and difficulties?", "Why did I experience delays, interruptions, changes of subject, or difficulties in education?", "Which subjects or areas of study were naturally more favorable for me?", "What type of education or specialization is best suited to my abilities?", "Is the present period favorable for higher education, professional qualifications, or learning a new skill?", "Should I continue my current course or consider changing my field of study?", "What does astrology indicate about my concentration, academic performance, and ability to complete my studies?", "Will I have opportunities for higher education, advanced degrees, or specialized professional training?", "What is the most favorable period for completing an important qualification or degree?", "Which educational choices are most likely to contribute to my future career and financial success?"], "Love": ["What does my horoscope reveal about my past romantic relationships and their major lessons?", "Why have my previous love relationships succeeded, failed, or ended unexpectedly?", "Is there an astrological indication of a significant past relationship that strongly influenced my life?", "What recurring emotional or romantic patterns have I experienced in the past?", "What is the current state of my love life according to my horoscope?", "Am I currently in a favorable period for finding a meaningful romantic relationship?", "What qualities should I look for in a compatible romantic partner?", "What planetary influences are currently affecting my emotions, attraction, intimacy, and romantic decisions?", "When is the most favorable period for meeting a serious romantic partner?", "Does my chart indicate the possibility of a long-term relationship, committed partnership, or marriage in the future?"], "Marriage": ["What does my horoscope reveal about my past relationship and marriage patterns?", "Why have I experienced misunderstandings, conflicts, separation, or emotional distance in important relationships?", "What relationship lessons from my past are important for my future happiness?", "What is the current astrological condition of my relationship or marriage?", "What are the major strengths and challenges in my present relationship?", "Are there current planetary influences creating communication problems, emotional distance, or conflicts with my partner?", "What can my horoscope reveal about compatibility, commitment, trust, and long-term stability in my relationship?", "What does my horoscope indicate about the future stability and development of my relationship or marriage?", "When are the most favorable periods for commitment, marriage, reconciliation, or strengthening an existing relationship?", "What does my long-term relationship life look like, and what should I understand about love, marriage, partnership, and emotional fulfillment?"]};
+function growthAnswer(n,type){if(n===1||n===8)return`Under Number ${n} (${type}), the path exhibits strong leadership drives, rapid structural realignments, and intense focus on command, responsibility and strategic restructuring.`;if(n===2||n===6||n===11)return`Governed by Number ${n} (${type}), emotional diplomacy, strategic patience, and partnership harmony dictate this phase. Cooperative alliances and measured decisions are emphasized.`;if(n===3||n===5)return`Driven by Number ${n} (${type}), dynamic expansion, active communication, and versatility dominate. Creative windows and expansion avenues are emphasized.`;if(n===4||n===7||n===22)return`Reflected by Number ${n} (${type}), analytical introspection, disciplined restructuring, and foundational security take priority. Meticulous planning is emphasized.`;return`Aligned with Number ${n} (${type}), transformative cycles, broad connectivity, and strategic alignment dominate this phase.`;}
+function calcGrowth(name,d,age){
+ const clean=name.replace(/[^a-zA-Z]/g,"").toLowerCase();let expr=0,soul=0;for(const ch of clean){expr+=LETTER_MAP[ch]||0;if(VOWELS.has(ch))soul+=LETTER_MAP[ch]||0}
+ expr=reduce9(expr);soul=reduce9(soul);const day=reduce9(d.getDate()),month=reduce9(d.getMonth()+1),year=reduce9(d.getFullYear());const lp=reduce9(day+month+year);
+ const gt=reduce9(expr+lp+1);const p1=reduce9(month+day),p2=reduce9(day+year),p3=reduce9(p1+p2),p4=reduce9(month+year);let active=p1;if(age>=27&&age<36)active=p2;else if(age>=36&&age<45)active=p3;else if(age>=45)active=p4;
+ const first=clean[0]||"a",essence=reduce9((LETTER_MAP[first]||1)+month);const gs=reduce9(essence+active+1);const c1=Math.abs(month-day),c2=Math.abs(day-year),c3=Math.abs(c1-c2);let gaVal=soul+c3-1;if(gaVal<=0)gaVal+=9;const ga=reduce9(gaVal);return{gt,gs,ga,lp,expr,soul,active,essence};
+}
+function renderGrowth(g){
+ const score=Math.min(98,Math.max(42,Math.round(((g.gt+g.gs+g.ga)/27)*100)));
+ renderMetrics("growthMetrics",[["Growth Trajectory Number",g.gt,"Long Term Growth Condition",score],["Growth Statistics Number",g.gs,"Current Growth Situation",score],["Growth Analytics Number",g.ga,"Future Growth Prediction",score],["Fortune Vibrational Index",score+"/100","Source analytical overall meter",score]]);
+ const groups=["Career","Job","Business","Education","Love","Marriage"];let offset=0;let out="";
+ for(const group of groups){const qs=GROWTH_QS[group];out+=`<div class="qa-group"><h4>${group} (${qs.length} Questions)</h4><div class="qa-grid">${qs.map((q,i)=>{const n=i<4?g.gt:(i<7?g.gs:g.ga);const type=i<4?"Growth Trajectory":(i<7?"Growth Statistics":"Growth Analytics");return`<div class="qa"><div class="q">Q${offset+i+1}. ${q}</div><div class="a">${growthAnswer(n,type)}</div></div>`}).join("")}</div></div>`;offset+=qs.length;}
+ document.getElementById("growthQA").innerHTML=out;
+}
+
+function calcDasha(d,weekday,age){
+ const lp=reduce9(reduce9(d.getFullYear())+reduce9(d.getMonth()+1)+reduce9(d.getDate()));
+ const wd=weekday+1;let start=reduce9(lp+wd+1);const nums=[];for(let i=0;i<9;i++)nums.push(((start-1+i)%9)+1);
+ const total=nums.reduce((a,b)=>a+b,0);let cursor=new Date(d);const details=[];
+ nums.forEach((num,i)=>{let dur=Math.round(num/total*90);if(i===8)dur=90-details.reduce((a,x)=>a+x.duration,0);if(dur<3)dur=3;let st=new Date(cursor),en=new Date(st);en.setFullYear(en.getFullYear()+dur);cursor=new Date(en);let ants=[],ac=num,acur=new Date(st);for(let a=0;a<5;a++){let ratio=ac/45;let ms=(en-st)*ratio;let ae=new Date(acur.getTime()+ms);if(a===4)ae=new Date(en);ants.push({num:ac,planet:PLANETS[ac][0],start:new Date(acur),end:new Date(ae)});acur=new Date(ae);ac=ac===9?1:ac+1;}details.push({num,planet:PLANETS[num][0],nature:PLANETS[num][1],duration:dur,start:st,end:en,ants});});
+ const now=new Date();let active=details[details.length-1],activeAnt=active.ants[0];for(const m of details){if(now>=m.start&&now<m.end){active=m;for(const a of m.ants){if(now>=a.start&&now<a.end){activeAnt=a;break}}break}}
+ return {lp,wd,nums,details,active,activeAnt};
+}
+function renderDasha(d){
+ const first=d.details[0],firstAnt=first.ants[0];
+ document.getElementById("dashaTop").innerHTML=[
+  ["Life Path Number",d.lp,PLANETS[d.lp][0],scoreFrom9(d.lp)],
+  ["Week Day Number",d.wd,["Sunday","Monday","Tuesday","Wednesday","Thursday","Friday","Saturday"][d.wd-1],scoreFrom9(d.wd)],
+  ["Birth Time Mahadasha",first.planet,"Maha #"+first.num,scoreFrom9(first.num)],
+  ["Birth Time Antardasha",firstAnt.planet,"Antar #"+firstAnt.num,scoreFrom9(firstAnt.num)]
+ ].map(x=>metricCard(x[0],x[1],x[2],x[3])).join("");
+ const areas=[
+ ["Personal Education","cognitive retention, learning capacity, specialized technical skills, higher certifications and research"],
+ ["Personal Career","professional milestones, recognition, promotions and higher-responsibility transitions"],
+ ["Personal Job","workplace stability, peer collaboration and sustained diligence"],
+ ["Personal Business","venture expansion, client acquisition, partnerships and scaling operations"],
+ ["Personal Love","emotional depth, romantic bonding and meaningful connection"],
+ ["Personal Relationship","supportive alliances, family dialogue and cooperative mindset"],
+ ["Personal Health","mental decompression, balanced nutrition and restorative sleep"],
+ ["Personal Finance","monetary inflow potential, investment management, asset accumulation and liability reduction"]
+ ];
+ document.getElementById("activeDasha").innerHTML=areas.map(a=>`<div class="forecast"><div class="badge">${a[0]}</div><p>Active ${d.active.planet} Mahadasha / ${d.activeAnt.planet} Antardasha: ${a[1]} are emphasized by the attached dasha calculator.</p></div>`).join("");
+ document.getElementById("planetAnalysis").innerHTML=`<table><thead><tr><th>Planet</th><th>Number</th><th>Nature</th></tr></thead><tbody>${Object.entries(PLANETS).map(([n,v])=>`<tr><td>${v[0]}</td><td>${n}</td><td>${v[1]}</td></tr>`).join("")}</tbody></table>`;
+ document.getElementById("dashaSummary").innerHTML=`<p>Your foundational Life Path Number is <strong>${d.lp}</strong>, governed by <strong>${PLANETS[d.lp][0]}</strong>. The current period is <strong>${d.active.planet} Mahadasha</strong> paired with <strong>${d.activeAnt.planet} Antardasha</strong>. The attached calculator emphasizes professional career, entrepreneurial ventures and financial asset accumulation while also highlighting relationship balance and restorative routines.</p>`;
+ const tbody=document.querySelector("#dashaTable tbody");tbody.innerHTML="";
+ d.details.forEach(m=>{const current=new Date()>=m.start&&new Date()<m.end;tbody.innerHTML+=`<tr style="${current?"background:rgba(255,213,74,.15)":""}"><td><strong>${m.planet}</strong></td><td>${m.num}</td><td>${m.duration} years</td><td>${fmtDate(m.start)}</td><td>${fmtDate(m.end)}</td><td>${Math.round((m.start-d.details[0].start)/31557600000)}–${Math.round((m.end-d.details[0].start)/31557600000)} years</td><td>${m.ants.map(a=>`<div><strong>${a.planet} (${a.num})</strong> — ${fmtDate(a.start)} to ${fmtDate(a.end)}</div>`).join("")}</td></tr>`});
+}
+function renderDashaTherapy(d){
+ const n=d.active.num;document.getElementById("dashaTherapy").innerHTML=[therapyCard(`Active Mahadasha ${d.active.planet} (${n})`,n),therapyCard(`Active Antardasha ${d.activeAnt.planet} (${d.activeAnt.num})`,d.activeAnt.num),...["Personal Education","Personal Career","Personal Job","Personal Business","Personal Love","Personal Relationship","Personal Health","Personal Finance"].map(a=>`<div class="therapy"><div class="therapy-num">${a}</div><p>Use the active CTN number as the complementary writing focus only if the issue is present and the practitioner is using the attached thesis framework. The thesis does not publish a dasha-specific therapy table.</p></div>`)].join("");
+}
+</script>
+</body>
+</html>
