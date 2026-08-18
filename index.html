@@ -491,7 +491,7 @@ function renderSurgical(s){
  document.getElementById("surgicalTop").innerHTML=[
   ["Corrected GMT Time",s.gmt,"Longitude-corrected time reference",100],
   ["Assigned Hora Number",s.hora,"Birth-day/time sequence",scoreFrom9(s.hora)],
-  ["Body Graph Matrix Value","v"+s.node+".0","Active matrix node",scoreFrom9(s.node-1)],
+  ["Body Graph Matrix Value","v"+s.node+".0","Active matrix node",scoreFrom9(s.node)],
   ["Vulnerability Index",s.risk.toFixed(1)+"/100","Surgical Risk & Stress Threshold",s.risk]
  ].map(x=>metricCard(x[0],x[1],x[2],x[3])).join("");
  document.getElementById("surgicalPrognosis").innerHTML=`<span class="badge">Matrix Node v${s.node}.0</span><p><strong>Surgical Prediction Analysis:</strong> ${s.prediction}</p><p class="small-note">Source calculator disclaimer: astrology cannot reliably determine whether someone needs surgery, predict surgical complications, or replace a surgeon's medical assessment. Real surgical decisions should come from a qualified medical professional.</p>`;
@@ -654,9 +654,9 @@ function calcWealth(name,d,weekday,age){
 function renderWealth(w){
  const power=Math.round(((w.wt+w.ws+w.wa)/27)*100);
  renderMetrics("wealthMetrics",[
-  ["Wealth Trajectory Number",w.wt,"Long Term Wealth Condition",Math.min(100,power)],
-  ["Wealth Statistics Number",w.ws,"Current Wealth Situation",Math.min(100,power)],
-  ["Wealth Analytics Number",w.wa,"Future Wealth Prediction",Math.min(100,power)],
+  ["Wealth Trajectory Number",w.wt,"Long Term Wealth Condition",scoreFrom9(w.wt)],
+  ["Wealth Statistics Number",w.ws,"Current Wealth Situation",scoreFrom9(w.ws)],
+  ["Wealth Analytics Number",w.wa,"Future Wealth Prediction",scoreFrom9(w.wa)],
   ["Financial Power Score",power+"%","Source financial overall gauge",power]
  ]);
  const trait={1:"pioneering leadership, independent ventures, and executive risk-taking",2:"strategic partnerships, diplomatic negotiations, and dual-income channels",3:"creative expansion, communication ventures, and brand building",4:"systematic real estate investment, disciplined savings, and rock-solid foundations",5:"dynamic trading, global markets, and adaptable investment strategies",6:"family legacy assets, luxury goods, and stable high-yield portfolios",7:"tech-driven investments, analytical research, and niche intellectual assets",8:"large-scale commercial enterprises, capital restructuring, and corporate authority",9:"humanitarian ventures, international trade, and wide-scale wealth distribution"};
@@ -689,7 +689,7 @@ function calcGrowth(name,d,age){
 }
 function renderGrowth(g){
  const score=Math.min(98,Math.max(42,Math.round(((g.gt+g.gs+g.ga)/27)*100)));
- renderMetrics("growthMetrics",[["Growth Trajectory Number",g.gt,"Long Term Growth Condition",score],["Growth Statistics Number",g.gs,"Current Growth Situation",score],["Growth Analytics Number",g.ga,"Future Growth Prediction",score],["Fortune Vibrational Index",score+"/100","Source analytical overall meter",score]]);
+ renderMetrics("growthMetrics",[["Growth Trajectory Number",g.gt,"Long Term Growth Condition",scoreFrom9(g.gt)],["Growth Statistics Number",g.gs,"Current Growth Situation",scoreFrom9(g.gs)],["Growth Analytics Number",g.ga,"Future Growth Prediction",scoreFrom9(g.ga)],["Fortune Vibrational Index",score+"/100","Source analytical overall meter",score]]);
  const groups=["Career","Job","Business","Education","Love","Marriage"];let offset=0;let out="";
  for(const group of groups){const qs=GROWTH_QS[group];out+=`<div class="qa-group"><h4>${group} (${qs.length} Questions)</h4><div class="qa-grid">${qs.map((q,i)=>{const n=i<4?g.gt:(i<7?g.gs:g.ga);const type=i<4?"Growth Trajectory":(i<7?"Growth Statistics":"Growth Analytics");return`<div class="qa"><div class="q">Q${offset+i+1}. ${q}</div><div class="a">${growthAnswer(n,type)}</div></div>`}).join("")}</div></div>`;offset+=qs.length;}
  document.getElementById("growthQA").innerHTML=out;
